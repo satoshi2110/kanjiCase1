@@ -13,6 +13,7 @@ class DisplayViewController: UIViewController {
     // UIコンポーネント
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var startButton: UIButton!
     
     // データセット
     let kanjiSets = [
@@ -25,21 +26,21 @@ class DisplayViewController: UIViewController {
     ]
     
     let audioSets = [
-        ["audio1-1.mp3", "audio1-2.mp3", "audio1-3.mp3"], // セット1
-        ["audio2-1.mp3", "audio2-2.mp3", "audio2-3.mp3"], // セット2
-        ["audio3-1.mp3", "audio3-2.mp3", "audio3-3.mp3"], // セット3
-        ["audio4-1.mp3", "audio4-2.mp3", "audio4-3.mp3"], // セット4
-        ["audio5-1.mp3", "audio5-2.mp3", "audio5-3.mp3"], // セット5
-        ["audio6-1.mp3", "audio6-2.mp3", "audio6-3.mp3"]  // セット6
+        ["a1-1.mp3", "a1-2.mp3", "a1-3.mp3"], // セット1
+        ["a2-1.mp3", "a2-2.mp3", "a2-3.mp3"], // セット2
+        ["a3-1.mp3", "a3-2.mp3", "a3-3.mp3"], // セット3
+        ["a4-1.mp3", "a4-2.mp3", "a4-3.mp3"], // セット4
+        ["a5-1.mp3", "a5-2.mp3", "a5-3.mp3"], // セット5
+        ["a6-1.mp3", "a6-2.mp3", "a6-3.mp3"]  // セット6
     ]
     
     let imageSets = [
-        ["image1-1.png", "image1-2.png", "image1-3.png"], // セット1
-        ["image2-1.png", "image2-2.png", "image2-3.png"], // セット2
-        ["image3-1.png", "image3-2.png", "image3-3.png"], // セット3
-        ["image4-1.png", "image4-2.png", "image4-3.png"], // セット4
-        ["image5-1.png", "image5-2.png", "image5-3.png"], // セット5
-        ["image6-1.png", "image6-2.png", "image6-3.png"]  // セット6
+        ["i1-1.png", "i1-2.png", "i1-3.png"], // セット1
+        ["i2-1.png", "i2-2.png", "i2-3.png"], // セット2
+        ["i3-1.png", "i3-2.png", "i3-3.png"], // セット3
+        ["i4-1.png", "i4-2.png", "i4-3.png"], // セット4
+        ["i5-1.png", "i5-2.png", "i5-3.png"], // セット5
+        ["i6-1.png", "i6-2.png", "i6-3.png"]  // セット6
     ]
     
     // 状態管理
@@ -54,7 +55,16 @@ class DisplayViewController: UIViewController {
         super.viewDidLoad()
         // 初期表示
         prepareShuffledItems()
-        displayNextItem()
+        
+        // スタートボタンの設定
+        startButton.setTitle("⚫️", for: .normal)
+        startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+    }
+    
+    // スタートボタンが押された時の処理
+    @objc func startButtonPressed() {
+        startButton.isHidden = true // スタートボタンを非表示にする
+        displayNextItem() // 表示を開始
     }
     
     // 漢字、音声、イラストのグループを準備する関数
@@ -90,20 +100,44 @@ class DisplayViewController: UIViewController {
         let imageName = item[2]
         
         label.text = kanji
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.playAudio(fileName: audioFileName)
-            self.label.text = "" // labelを消す
+        if selectedSetIndex < 3 {
+            // セット1〜3: labelと音声を同時に提示
+            playAudio(fileName: audioFileName)
+            
+            // 2秒後に画像を表示
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.label.text = ""
+                self.displayImage(imageName: imageName)
+                
+                // 2秒後に画像を消す
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.imageView.image = nil
+                }
+            }
+        } else {
+            // セット4〜6: labelの1秒後に音声を提示
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.playAudio(fileName: audioFileName)
+                
+                // 音声の1秒後に画像を表示
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.label.text = ""
+                    self.displayImage(imageName: imageName)
+                    
+                    // 2秒後に画像を消す
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.imageView.image = nil
+                    }
+                }
+            }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.displayImage(imageName: imageName)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.view.backgroundColor = .darkGray // 背景を黒に変更
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            self.view.backgroundColor = .lightGray // 背景を黒に変更
             self.imageView.image = nil // imageViewを消す
         }
         
         // 次の表示を1秒後に実行
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.repeatCount += 1
             self.view.backgroundColor = .white // 背景を元に戻す
             self.displayNextItem()
