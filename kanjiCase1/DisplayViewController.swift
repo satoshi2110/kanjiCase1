@@ -17,12 +17,12 @@ class DisplayViewController: UIViewController {
     
     // データセット
     let kanjiSets = [
-        ["山", "川", "谷"], // セット1
-        ["海", "森", "林"], // セット2
-        ["空", "雲", "雨"], // セット3
-        ["火", "風", "雷"], // セット4
-        ["星", "月", "太陽"], // セット5
-        ["花", "草", "木"]  // セット6
+        ["毛", "母", "風"], // セット1
+        ["船", "鳥", "夜"], // セット2
+        ["光", "馬", "麦"], // セット3
+        ["父", "矢", "海"], // セット4
+        ["雪", "魚", "岩"], // セット5
+        ["肉", "時", "体"]  // セット6
     ]
     
     let audioSets = [
@@ -61,9 +61,9 @@ class DisplayViewController: UIViewController {
         startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
         
         if selectedSetIndex < 3 {
-            startButton.tintColor = .lightGray
+            startButton.tintColor = .green
         }else {
-            startButton.tintColor = .darkGray
+            startButton.tintColor = .blue
         }
     }
     
