@@ -70,17 +70,72 @@
                                     <action selector="button3Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ggc-cu-xz7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZX-78-BZ3">
+                                <rect key="frame" x="219" y="823" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="同時１"/>
+                                <connections>
+                                    <action selector="assessment1Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bvh-Hq-x7S"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rim-fk-Ith">
+                                <rect key="frame" x="368" y="823" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="同時２"/>
+                                <connections>
+                                    <action selector="assessment2Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hZa-Ea-vQm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMG-mG-beU">
+                                <rect key="frame" x="515" y="822" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="同時３"/>
+                                <connections>
+                                    <action selector="assessment3Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SEs-kk-5oN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJE-LQ-kux">
+                                <rect key="frame" x="219" y="928" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="遅延１"/>
+                                <connections>
+                                    <action selector="assessment4Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p6P-ki-z55"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uls-Yr-889">
+                                <rect key="frame" x="368" y="928" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="遅延２"/>
+                                <connections>
+                                    <action selector="assessment5Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E01-le-AHD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxS-L1-03n">
+                                <rect key="frame" x="515" y="927" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="遅延３"/>
+                                <connections>
+                                    <action selector="assessment6Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BWf-W0-fIv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <segue destination="hsq-dc-1VX" kind="presentation" identifier="DisplayViewController" id="Dfr-bf-EmF"/>
+                        <segue destination="DNC-rH-EDI" kind="presentation" id="gxD-g5-8nr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="4"/>
+            <point key="canvasLocation" x="101.48148148148148" y="3.8888888888888888"/>
         </scene>
         <!--Display View Controller-->
         <scene sceneID="0wk-rz-NZ8">
@@ -121,6 +176,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Zj-JH-T7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="848.8888888888888" y="3.8888888888888888"/>
+        </scene>
+        <!--Assessment View Controller-->
+        <scene sceneID="TaU-He-DT7">
+            <objects>
+                <viewController storyboardIdentifier="AssessmentViewController" modalPresentationStyle="fullScreen" id="DNC-rH-EDI" customClass="AssessmentViewController" customModule="kanjiCase1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vdL-4K-CYt">
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6co-ER-cSk">
+                                <rect key="frame" x="177" y="303" width="457" height="474"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syE-jc-TNu">
+                                <rect key="frame" x="349" y="966" width="112" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="次へ"/>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XVS-qy-0cc">
+                                <rect key="frame" x="330" y="935" width="150" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yHG-a7-Rst"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="6co-ER-cSk" id="MtU-O5-4VB"/>
+                        <outlet property="nextButton" destination="syE-jc-TNu" id="Ied-AW-RMr"/>
+                        <outlet property="progressView" destination="XVS-qy-0cc" id="h4D-S5-3zh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="24Z-7Q-h6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846.66666666666663" y="655"/>
         </scene>
     </scenes>
     <resources>
