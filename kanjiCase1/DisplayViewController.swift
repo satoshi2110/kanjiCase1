@@ -26,12 +26,12 @@ class DisplayViewController: UIViewController {
     ]
     
     let audioSets = [
-        ["a1-1.mp3", "a1-2.mp3", "a1-3.mp3"], // セット1
-        ["a2-1.mp3", "a2-2.mp3", "a2-3.mp3"], // セット2
-        ["a3-1.mp3", "a3-2.mp3", "a3-3.mp3"], // セット3
-        ["a4-1.mp3", "a4-2.mp3", "a4-3.mp3"], // セット4
-        ["a5-1.mp3", "a5-2.mp3", "a5-3.mp3"], // セット5
-        ["a6-1.mp3", "a6-2.mp3", "a6-3.mp3"]  // セット6
+        ["a1-1.wav", "a1-2.wav", "a1-3.wav"], // セット1
+        ["a2-1.wav", "a2-2.wav", "a2-3.wav"], // セット2
+        ["a3-1.wav", "a3-2.wav", "a3-3.wav"], // セット3
+        ["a4-1.wav", "a4-2.wav", "a4-3.wav"], // セット4
+        ["a5-1.wav", "a5-2.wav", "a5-3.wav"], // セット5
+        ["a6-1.wav", "a6-2.wav", "a6-3.wav"]  // セット6
     ]
     
     let imageSets = [
@@ -57,8 +57,14 @@ class DisplayViewController: UIViewController {
         prepareShuffledItems()
         
         // スタートボタンの設定
-        startButton.setTitle("⚫️", for: .normal)
+        startButton.setTitle("●", for: .normal)
         startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+        
+        if selectedSetIndex < 3 {
+            startButton.tintColor = .lightGray
+        }else {
+            startButton.tintColor = .darkGray
+        }
     }
     
     // スタートボタンが押された時の処理
@@ -132,7 +138,12 @@ class DisplayViewController: UIViewController {
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            self.view.backgroundColor = .lightGray // 背景を黒に変更
+            // セット1〜3の時、背景を緑に変更
+            if self.selectedSetIndex < 3 {
+                self.view.backgroundColor = .lightGray
+            } else {
+                self.view.backgroundColor = .darkGray// セット4〜6の時は灰色
+            }
             self.imageView.image = nil // imageViewを消す
         }
         
