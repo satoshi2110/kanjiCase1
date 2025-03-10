@@ -42,10 +42,10 @@ class AssessmentViewController: UIViewController {
         displayCurrentKanji()
         
         // ボタンの設定
-        correctButton.setTitle("正解", for: .normal)
+        correctButton.setTitle("　　", for: .normal)
         correctButton.addTarget(self, action: #selector(correctButtonPressed), for: .touchUpInside)
         
-        incorrectButton.setTitle("不正解", for: .normal)
+        incorrectButton.setTitle("　　", for: .normal)
         incorrectButton.addTarget(self, action: #selector(incorrectButtonPressed), for: .touchUpInside)
         
         // プログレスビューの設定

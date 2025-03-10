@@ -137,7 +137,7 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // パスワード入力フィールド
         alert.addTextField { textField in
-            textField.placeholder = "数字4文字"
+            textField.placeholder = "入力してください"
             textField.keyboardType = .numberPad
             textField.isSecureTextEntry = true // 入力内容を隠す
         }
