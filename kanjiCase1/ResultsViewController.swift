@@ -15,6 +15,7 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
     // Realmの結果を保持する配列
     var results: Results<AssessmentResult>!
     var groupedResults: [String: [AssessmentResult]] = [:] // セッションごとにグループ化
+    var sortedSessionIds: [String] = [] // 日時でソートされたセッションID
     
     // パスワード
     let correctPassword = "1234" // 正しいパスワード
@@ -28,6 +29,9 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // セッションごとに結果をグループ化
         groupResultsBySession()
+        
+        // セッションIDを日時でソート
+        sortSessionIdsByDate()
         
         // TableViewの設定
         tableView.dataSource = self
@@ -45,16 +49,28 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    // セッションIDを日時の降順でソートする関数
+    func sortSessionIdsByDate() {
+        // セッションIDを日時の降順でソート
+        sortedSessionIds = groupedResults.keys.sorted { sessionId1, sessionId2 in
+            guard let result1 = groupedResults[sessionId1]?.first,
+                  let result2 = groupedResults[sessionId2]?.first else {
+                return false
+            }
+            return result1.date > result2.date // 降順でソート
+        }
+    }
+    
     // MARK: - UITableViewDataSource
     
     // セクションの数
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groupedResults.keys.count
+        return sortedSessionIds.count
     }
     
     // セクションヘッダーのタイトル
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sessionId = Array(groupedResults.keys)[section]
+        let sessionId = sortedSessionIds[section]
         let results = groupedResults[sessionId]!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
@@ -90,14 +106,14 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セクションごとの行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sessionId = Array(groupedResults.keys)[section]
+        let sessionId = sortedSessionIds[section]
         return groupedResults[sessionId]?.count ?? 0
     }
     
     // セルの内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let sessionId = Array(groupedResults.keys)[indexPath.section]
+        let sessionId = sortedSessionIds[indexPath.section]
         if let result = groupedResults[sessionId]?[indexPath.row] {
             // セルに表示するテキスト
             let status = result.isCorrect ? "正解" : "不正解"
@@ -122,7 +138,7 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
         let section = headerView.tag // タップされたセクション番号を取得
         
         // セッションIDを取得
-        let sessionId = Array(groupedResults.keys)[section]
+        let sessionId = sortedSessionIds[section]
         
         // パスワード入力アラートを表示
         showPasswordAlert { [weak self] in
@@ -181,6 +197,9 @@ class ResultsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // グループ化された結果からも削除
         groupedResults.removeValue(forKey: sessionId)
+        
+        // セッションIDを再ソート
+        sortSessionIdsByDate()
         
         // TableView を更新
         tableView.reloadData()

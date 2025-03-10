@@ -34,6 +34,7 @@ class AssessmentViewController: UIViewController {
     let timerDuration: TimeInterval = 10 // タイマーの期間（秒）
     let realm = try! Realm() // Realm インスタンス
     var sessionId: String = UUID().uuidString // セッションIDを生成
+    let buttonColor = UIColor.lightGray.withAlphaComponent(0.2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,14 @@ class AssessmentViewController: UIViewController {
         displayCurrentKanji()
         
         // ボタンの設定
-        correctButton.setTitle("　　", for: .normal)
+        correctButton.setTitle(".", for: .normal)
+        correctButton.setTitleColor(buttonColor, for: .normal)
+        correctButton.setTitleColor(buttonColor, for: .highlighted)
         correctButton.addTarget(self, action: #selector(correctButtonPressed), for: .touchUpInside)
         
-        incorrectButton.setTitle("　　", for: .normal)
+        incorrectButton.setTitle(".", for: .normal)
+        incorrectButton.setTitleColor(buttonColor, for: .normal)
+        incorrectButton.setTitleColor(buttonColor, for: .highlighted)
         incorrectButton.addTarget(self, action: #selector(incorrectButtonPressed), for: .touchUpInside)
         
         // プログレスビューの設定
@@ -84,6 +89,10 @@ class AssessmentViewController: UIViewController {
             self.resetBackgroundColor()
             self.currentIndex += 1
             self.displayCurrentKanji()
+            self.correctButton.setTitleColor(self.buttonColor, for: .normal)
+            self.correctButton.setTitleColor(self.buttonColor, for: .highlighted)
+            self.incorrectButton.setTitleColor(self.buttonColor, for: .normal)
+            self.incorrectButton.setTitleColor(self.buttonColor, for: .highlighted)
         }
     }
     
@@ -93,6 +102,9 @@ class AssessmentViewController: UIViewController {
             self.view.backgroundColor = .lightGray // セット1〜3: 薄い灰色
         } else {
             self.view.backgroundColor = .darkGray // セット4〜6: 濃い灰色
+            self.correctButton.setTitleColor(.darkGray, for: .normal)
+            self.correctButton.setTitleColor(UIColor.black, for: .highlighted)
+            self.incorrectButton.setTitleColor(.darkGray, for: .normal)
         }
     }
     

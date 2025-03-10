@@ -277,8 +277,8 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XVS-qy-0cc">
                                 <rect key="frame" x="330" y="935" width="150" height="4"/>
                             </progressView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-eG-9kT">
-                                <rect key="frame" x="300" y="20" width="210" height="34.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="1yY-eG-9kT">
+                                <rect key="frame" x="315" y="0.0" width="180" height="34.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xw-LB-dT7">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="34.5"/>
@@ -286,7 +286,7 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8W-pA-dt3">
-                                        <rect key="frame" x="135" y="0.0" width="75" height="34.5"/>
+                                        <rect key="frame" x="105" y="0.0" width="75" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
@@ -298,11 +298,12 @@
                         <constraints>
                             <constraint firstItem="6co-ER-cSk" firstAttribute="centerX" secondItem="XVS-qy-0cc" secondAttribute="centerX" id="BwH-IM-1K3"/>
                             <constraint firstItem="1yY-eG-9kT" firstAttribute="centerX" secondItem="vdL-4K-CYt" secondAttribute="centerX" id="HXs-AI-rWA"/>
-                            <constraint firstItem="1yY-eG-9kT" firstAttribute="top" secondItem="yHG-a7-Rst" secondAttribute="top" constant="20" id="SV8-KK-N8M"/>
+                            <constraint firstItem="1yY-eG-9kT" firstAttribute="top" secondItem="yHG-a7-Rst" secondAttribute="top" id="SV8-KK-N8M"/>
                             <constraint firstItem="XVS-qy-0cc" firstAttribute="leading" secondItem="yHG-a7-Rst" secondAttribute="leading" constant="330" id="SoW-VK-ZJM"/>
                             <constraint firstItem="1yY-eG-9kT" firstAttribute="centerX" secondItem="6co-ER-cSk" secondAttribute="centerX" id="fQm-97-fOc"/>
                             <constraint firstItem="6co-ER-cSk" firstAttribute="centerY" secondItem="vdL-4K-CYt" secondAttribute="centerY" id="iUz-dB-nkz"/>
                             <constraint firstItem="yHG-a7-Rst" firstAttribute="bottom" secondItem="XVS-qy-0cc" secondAttribute="bottom" constant="141" id="js1-TV-eFR"/>
+                            <constraint firstItem="1yY-eG-9kT" firstAttribute="top" secondItem="yHG-a7-Rst" secondAttribute="top" id="m59-8z-lIv"/>
                             <constraint firstItem="1yY-eG-9kT" firstAttribute="centerX" secondItem="XVS-qy-0cc" secondAttribute="centerX" id="mYb-bU-Vir"/>
                             <constraint firstItem="6co-ER-cSk" firstAttribute="leading" secondItem="yHG-a7-Rst" secondAttribute="leading" constant="177" id="wL2-2g-5ha"/>
                         </constraints>
