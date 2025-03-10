@@ -63,6 +63,19 @@ class ButtonViewController: UIViewController {
         presentAssessmentViewController(assessmentIndex: 5)
     }
     
+    // 「結果を表示」ボタンのアクション
+    @IBAction func showResultsButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let resultsVC = storyboard.instantiateViewController(withIdentifier: "ResultsViewController") as? ResultsViewController {
+            // ナビゲーションコントローラーが存在するか確認
+            if let navigationController = self.navigationController {
+                navigationController.pushViewController(resultsVC, animated: true)
+            } else {
+                print("Error: Navigation controller is nil")
+            }
+        }
+    }
+    
     // プレゼンVCを表示する関数
     func presentDisplayViewController(setIndex: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
