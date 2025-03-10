@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AssessmentViewController: UIViewController {
     // UIコンポーネント
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var correctButton: UIButton! // 正解ボタン
+    @IBOutlet weak var incorrectButton: UIButton! // 不正解ボタン
     
     // データセット
     let kanjiSets = [
@@ -30,6 +32,8 @@ class AssessmentViewController: UIViewController {
     var timer: Timer? // タイマー
     var progress: Float = 0.0 // プログレスの進捗
     let timerDuration: TimeInterval = 10 // タイマーの期間（秒）
+    let realm = try! Realm() // Realm インスタンス
+    var sessionId: String = UUID().uuidString // セッションIDを生成
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +42,14 @@ class AssessmentViewController: UIViewController {
         displayCurrentKanji()
         
         // ボタンの設定
-        nextButton.setTitle("次へ", for: .normal)
-        nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+        correctButton.setTitle("正解", for: .normal)
+        correctButton.addTarget(self, action: #selector(correctButtonPressed), for: .touchUpInside)
+        
+        incorrectButton.setTitle("不正解", for: .normal)
+        incorrectButton.addTarget(self, action: #selector(incorrectButtonPressed), for: .touchUpInside)
         
         // プログレスビューの設定
         progressView.progress = 0.0 // 初期値
-        progressView.progressTintColor = .systemBlue // 進捗色
-        progressView.trackTintColor = .lightGray // 背景色
         
         // タイマーを開始
         startTimer()
@@ -75,7 +80,7 @@ class AssessmentViewController: UIViewController {
         changeBackgroundColor()
         
         // 1秒後に次の漢字を表示
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.resetBackgroundColor()
             self.currentIndex += 1
             self.displayCurrentKanji()
@@ -98,9 +103,14 @@ class AssessmentViewController: UIViewController {
     
     // タイマーを開始する関数
     func startTimer() {
-        progress = 0.0 // プログレスをリセット
+        // 既存のタイマーを停止
+        stopTimer()
+        
+        // プログレスをリセット
+        progress = 0.0
         progressView.progress = progress
         
+        // 新しいタイマーを開始
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             self.updateProgress()
         }
@@ -114,6 +124,8 @@ class AssessmentViewController: UIViewController {
         // タイマーが終了したら次の漢字を表示
         if progress >= 1.0 {
             stopTimer()
+            saveResult(isCorrect: false) // 不正解として保存
+            print("不正解...")
             displayNextKanji()
             startTimer()
         }
@@ -125,9 +137,31 @@ class AssessmentViewController: UIViewController {
         timer = nil
     }
     
-    // 次へボタンが押された時の処理
-    @objc func nextButtonPressed() {
-        stopTimer()
+    // 結果を保存する関数
+    func saveResult(isCorrect: Bool) {
+        let result = AssessmentResult()
+        result.kanji = shuffledKanjis[currentIndex] // 現在表示されている漢字
+        result.isCorrect = isCorrect // 正解か不正解か
+        result.date = Date() // 現在の日時
+        result.sessionId = sessionId // セッションIDを設定
+        
+        try! realm.write {
+            realm.add(result) // Realm に保存
+        }
+    }
+    
+    // 正解ボタンが押された時の処理
+    @objc func correctButtonPressed() {
+        saveResult(isCorrect: true) // 正解として保存
+        print("正解！")
+        displayNextKanji()
+        startTimer()
+    }
+    
+    // 不正解ボタンが押された時の処理
+    @objc func incorrectButtonPressed() {
+        saveResult(isCorrect: false) // 不正解として保存
+        print("不正解...")
         displayNextKanji()
         startTimer()
     }
